@@ -34,21 +34,21 @@ int main(int argc, char *argv[]) {
 
   // Instruction: Replace the underscore characters __ with the proper format specifier
   // in the following C statement then uncomment it. Compile and execute.
-  // printf("\nBinary representation of %__ is '0b", signedInt);
+  printf("\nBinary representation of %d is '0b", signedInt);
   printBinaryWithPadding(signedInt);
   printf("'\n\n");
 
   // Instruction: Replace the underscore characters __ with the proper format specifier
   // in the following C statement then uncomment it. Compile and execute.
-  // printf("Hexadecimal representation of %__ is ", signedInt);
+  printf("Hexadecimal representation of %d is ", signedInt);
   printf("'0x");
   show_bytes((byte_pointer) &signedInt, sizeof(int)); 
   printf("'\n\n");
 
   // Instruction: Replace the underscore characters __ with the proper format specifier
   // in the following two C statements then uncomment them. Compile and execute.
-  // printf("Signed integral representation of %d is '%___'\n\n", signedInt, signedInt);
-  // printf("Unsigned integral representation of %d is '%___'\n\n", signedInt, signedInt);
+  printf("Signed integral representation of %d is '%i'\n\n", signedInt, signedInt);
+  printf("Unsigned integral representation of %d is '%u'\n\n", signedInt, signedInt);
 
   return 0;
 }
