@@ -3,9 +3,9 @@
  *
  * Description:
  *
- * Authors: Our textbook + AL + <your name>
- * Student number: <your student number>
- * Date: May 2025
+ * Authors: Our textbook + AL + Sadhika Huria
+ * Student number: 301599274
+ * Date: May 29, 2025
  */
 
 #include <stdio.h>
@@ -17,7 +17,9 @@ typedef unsigned char *byte_pointer;
 void show_bytes(byte_pointer start, size_t len) {
   size_t i;
   for (i = 0; i < len; i++)
-    printf(" %.2x", start[i]); 	
+    printf(" %p 0x%.2x\n", &(start[i]), start[i]); 	
+    // the /n was not specified, however it makes the output look much cleaner, if needed, it can be removed. 
+    
   printf("\n");
   return;	
 }
@@ -25,12 +27,14 @@ void show_bytes(byte_pointer start, size_t len) {
 // Question 3 b.
 // Put your answer to Question 3 b) here as a comment
 
+// DO LATER ON THE TARGET MACHINE
+
 
 // Question 3 c.
 void show_bytes_2(byte_pointer start, size_t len) {
   size_t i;
   for (i = 0; i < len; i++)
-    printf(" %.2x", start[i]); 	
+    printf(" %.2x", *(start+i)); 	
   printf("\n");
   return;		
 }
@@ -38,7 +42,20 @@ void show_bytes_2(byte_pointer start, size_t len) {
 // Question 3 d.
 void show_bits(int decimal) {
 	
-  // put your code here!
+  int binary[32];
+  int size = 0;
+
+  for(int i = 0; decimal > 0; i++){
+    binary[i] = decimal % 2;
+    decimal = decimal / 2;
+    size++;
+  }
+
+  for( int i = size -1; i >= 0; i++){
+    printf("%d", binary[i]);
+  }
+  printf("\n");
+  
 
   return; 
 }	

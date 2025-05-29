@@ -26,13 +26,27 @@ int main() {
     float fval = (float) ival;
     int *pval = &ival;
 
+    printf("\nshow_int(inval) test:\n");
     show_int(ival);
+
+    printf("\nshow_float(fval) test:\n");
     show_float(fval);
+
+    printf("\nshow_pointer(pval) test:\n");
     show_pointer(pval);
 
 /* Add your test cases here in order
    to test the functions you have modified 
    and the functions you have created. */
+    
+    int bitval1 = 12345;
+    int bitval2 = -12345;
+
+    printf("\nshow_bits() test 1:\n");
+    show_bits(bitval1);
+    
+    printf("\nshow_bits() test 2:\n");
+    show_bits(bitval2);
 
     return 0;
 
