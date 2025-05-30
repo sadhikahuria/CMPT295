@@ -42,8 +42,16 @@ void show_bytes_2(byte_pointer start, size_t len) {
 // Question 3 d.
 void show_bits(int decimal) {
 	
-  int binary[32];
+
+  int binary[32] = {0};
   int size = 0;
+
+  if (decimal<0){
+    decimal = decimal *(-1);
+    decimal = (2147483648) - decimal;
+    binary[31] = 1;
+  }
+
 
   for(int i = 0; decimal > 0; i++){
     binary[i] = decimal % 2;
@@ -51,7 +59,8 @@ void show_bits(int decimal) {
     size++;
   }
 
-  for( int i = size -1; i >= 0; i++){
+
+  for( int i = 31; i >= 0; i--){
     printf("%d", binary[i]);
   }
   printf("\n");
