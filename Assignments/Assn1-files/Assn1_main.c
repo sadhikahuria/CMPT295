@@ -29,10 +29,10 @@ int main() {
     printf("\nshow_int(inval) test:\n");
     show_int(ival);
 
-    printf("\nshow_float(fval) test:\n");
+    printf("\n\nshow_float(fval) test:\n");
     show_float(fval);
 
-    printf("\nshow_pointer(pval) test:\n");
+    printf("\n\nshow_pointer(pval) test:\n");
     show_pointer(pval);
 
 /* Add your test cases here in order
@@ -42,11 +42,36 @@ int main() {
     int bitval1 = 12345;
     int bitval2 = -12345;
 
-    printf("\nshow_bits() test 1:\n");
+    printf("\n\n\nshow_bits() test 1:\n");
     show_bits(bitval1);
     
     printf("\nshow_bits() test 2:\n");
     show_bits(bitval2);
+    
+    printf("\n\n\nmask_LSbits( sizeof(int) *8 ) invalid test wordsize:\n");
+    int mask = sizeof(int) *8;
+    show_bits(mask_LSbits(mask));
+
+    printf("\nnmask_LSbits(( sizeof(int) *8 ) + 4) invalid test wordsize:\n");
+    mask = (sizeof(int) *8)+4;
+    show_bits(mask_LSbits(mask));
+    
+    printf("\nmask_LSbits(-1000) invalid test :\n");
+    mask = -1000;
+    show_bits(mask_LSbits(mask));
+    
+    printf("\nmask_LSbits(0) invalid test :\n");
+    mask = 0;
+    show_bits(mask_LSbits(mask));
+
+
+    printf("\nmask_LSbits(1) test :\n");
+    mask = 1;
+    show_bits(mask_LSbits(mask));
+    
+    printf("\nmask_LSbits(1000) test :\n");
+    mask = 1000;
+    show_bits(mask_LSbits(mask));
 
     return 0;
 

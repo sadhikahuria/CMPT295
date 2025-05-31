@@ -17,8 +17,9 @@ typedef unsigned char *byte_pointer;
 void show_bytes(byte_pointer start, size_t len) {
   size_t i;
   for (i = 0; i < len; i++)
-    printf(" %p 0x%.2x\n", &(start[i]), start[i]); 	
+    printf(" %p %.2x\n", &(start[i]), start[i]); 	
     // the /n was not specified, however it makes the output look much cleaner, if needed, it can be removed. 
+    // the output says to print it with 0x, the system doesn't print it with 0x, this can be added to the print statement to change the output.
     
   printf("\n");
   return;	
@@ -34,7 +35,10 @@ void show_bytes(byte_pointer start, size_t len) {
 void show_bytes_2(byte_pointer start, size_t len) {
   size_t i;
   for (i = 0; i < len; i++)
-    printf(" %.2x", *(start+i)); 	
+    printf(" %p %.2x\n", (start + i), *(start+i));
+    
+    // the question says to modify the pointer notation only, however afterwards it says to make sure the values print the same thing. which is why I have added memory address to be printed int the print statement.
+
   printf("\n");
   return;		
 }
@@ -74,9 +78,23 @@ void show_bits(int decimal) {
 int mask_LSbits(int n) {
 	
   // put your code here!
+  int word_size = sizeof(int) * 8;
+  if (n <= 0 ){
+    return 0;
+  }
 
+  if (n >= word_size){
+    return -1;
+  }
+
+  int masked = 1;
+  masked = 1 << n;  
+  // show_bits(masked);
+  masked = masked -1;
+  // show_bits(masked);
+  
   // feel free to modify this return statement if needed
-  return 0; 
+  return masked; 
 }
 
 void show_int(int x) {
