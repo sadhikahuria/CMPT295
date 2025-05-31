@@ -69,8 +69,8 @@ int main() {
     mask = 1;
     show_bits(mask_LSbits(mask));
     
-    printf("\nmask_LSbits(1000) test :\n");
-    mask = 1000;
+    printf("\nmask_LSbits(10) test :\n");
+    mask = 10;
     show_bits(mask_LSbits(mask));
 
     return 0;
