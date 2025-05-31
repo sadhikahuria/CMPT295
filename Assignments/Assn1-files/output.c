@@ -4,7 +4,7 @@
             show_int(inval) test:
 
             ival = 12345
-            0x7ffefc46effc 39
+            0x7ffefc46effc 39 
             0x7ffefc46effd 30
             0x7ffefc46effe 00
             0x7ffefc46efff 00

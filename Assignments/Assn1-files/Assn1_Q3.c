@@ -20,6 +20,7 @@ void show_bytes(byte_pointer start, size_t len) {
     printf(" %p %.2x\n", &(start[i]), start[i]); 	
     // the /n was not specified, however it makes the output look much cleaner, if needed, it can be removed. 
     // the output says to print it with 0x, the system doesn't print it with 0x, this can be added to the print statement to change the output.
+
     
   printf("\n");
   return;	
@@ -28,7 +29,23 @@ void show_bytes(byte_pointer start, size_t len) {
 // Question 3 b.
 // Put your answer to Question 3 b) here as a comment
 
-// DO LATER ON THE TARGET MACHINE
+/*
+
+  Using LLL method taught in class. I can conclude that this system architecture is little endian because for all values, the least significant bit is at the lowest memory address. 
+
+  Sample output:
+    show_int(inval) test:
+
+    ival = 12345
+      0x7ffe855ac1bc 39
+      0x7ffe855ac1bd 30
+      0x7ffe855ac1be 00
+      0x7ffe855ac1bf 00
+
+  Here the hexadecimal number is 0x00003039,
+    the LSB is 39 which is at the lowest memory address of 0x7ffe855ac1bc
+
+*/
 
 
 // Question 3 c.
