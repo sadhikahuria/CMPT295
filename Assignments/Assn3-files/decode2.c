@@ -1,3 +1,11 @@
+/*
+Name: Sadhika Huria
+Student Number: 301599274
+Date: June 13. 2025
+CMPT 295 
+*/
+
+
 #include  <stdio.h>
 
 // for the function prototype
@@ -34,4 +42,3 @@ long decode2(long x, long y, long z){
 
     return ret;
 }
-
