@@ -71,7 +71,7 @@ mul: # Description: Performs integer multiplication - when both operands are non
 	xorl	%eax , %eax		# set result to 0
 
 	loop:
-	testl  	%rsi, %rsi 		# if rsi, y is 0, end loop
+	testl  	%esi, %esi 		# if rsi, y is 0, end loop
 	je endloop
 
 	testl $1, %esi 			#check if esi is even or odd, comparing checking LSb
@@ -81,8 +81,8 @@ mul: # Description: Performs integer multiplication - when both operands are non
 
 	
 	dont_add:
-		shll $1, edi
-		shrl $1, esi
+		shll $1, %edi
+		shrl $1, %esi
 		jmp loop
 
 
