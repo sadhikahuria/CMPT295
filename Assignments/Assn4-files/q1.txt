@@ -1,0 +1,77 @@
+assembly code:
+
+    abs(int):
+    movl    %edi, %eax
+    movl    %edi, %edx
+    sarl    $31,  %edx
+    xorl    %edx, %eax
+    subl    %edx, %eax
+    ret
+
+C code:
+    int abs(int x) {
+        if ( x < 0 ) {
+            x = -x;
+        }
+        return x;
+    }
+
+
+x = -7
+
+movl %edi, %eax copies the content of %edi (x = -7) into %eax.
+
+After execution, this is the content of registers:
+    %edi <- 11111111111111111111111111111001
+
+            <-          29 1’s, 2 0's, 1 1's         ->
+
+    %eax <- 11111111111111111111111111111001
+
+            <-          29 1’s, 2 0's, 1 1's         ->
+
+
+
+movl %edi, %edx copies the content of %edi (x = -7) into %edx.
+
+After execution, this is the content of registers:
+    %edi <- 11111111111111111111111111111001
+
+            <-          29 1’s, 2 0's, 1 1's         ->
+
+
+    %edx <- 11111111111111111111111111111001
+
+            <-          29 1’s, 2 0's, 1 1's         ->
+
+
+sarl $31, %edx shifts the content of %edx right (arithmetic - fill in with sign bit -> 1) 31 times.
+
+After execution, this is the content of registers:
+    %edx <- 00000000000000000000000000000001
+
+            <-            31 0’s, 1 1's         ->
+
+xorl %edx, %eax
+
+    %eax <- 11111111111111111111111111111001
+    ^
+    %edx <- 00000000000000000000000000000001
+    ----------------------------------------
+    %eax <- 11111111111111111111111111111000
+
+
+subl %edx, %eax
+
+    %eax <-   11111111111111111111111111111000
+    -
+    %edx <-   00000000000000000000000000000001
+    ----------------------------------------
+    %eax <- 1 00000000000000000000000000000111
+
+carry out = 1, 33rd bit, ignored. 
+    %eax <- 00000000000000000000000000000111
+
+ret
+
+And the return value is %eax = 00000000000000000000000000000111 = 7
