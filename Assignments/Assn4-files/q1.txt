@@ -62,7 +62,7 @@ xorl %edx, %eax
 
 
 subl %edx, %eax
-(same as adding %eax, adding 1)
+(same as adding -(%eax), adding -(-1) = adding 1)
 
     %eax <- 00000000000000000000000000000110
     -
