@@ -11,8 +11,8 @@
 
 
 mul: 
-	testl %esi, %esi
-	je finish
+	testl %esi, %esi            # check if esi == 0
+	je finish                   # if esi == 0, end function, return result
 
 	subl $1, %esi
 	addl %edi, %edx
