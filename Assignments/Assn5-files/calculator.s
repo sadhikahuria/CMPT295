@@ -13,22 +13,18 @@
 mul: 
 	testl %esi, %esi            # check if esi == 0
 	je base_case                   # if esi == 0, end function, return result
-
-	pushq %rbp
-	movq %rsp, %rbp
 	
 	pushq %rdi 			# save x and y on to the stack 
 	pushq %rsi
 
 	subl $1, %esi		# decrement y 
+	call mul 			# call the function
 
 	popq %rsi		#restore both original values
 	popq %rdi
 
 	addl %edi, %eax		# adding x to result
 
-	movq %rbp, %eax		# get stack pointer back
-	popq %rbp			# get base pointer back
 	ret
 	
 
