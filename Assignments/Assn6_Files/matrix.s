@@ -63,23 +63,39 @@ transpose:
 
 # For each row
 rowLoop:
-    xorl %r8d, %r8d            # j = 0 (column index j in %r8d)
-    cmpl %edx, %ecx            # while i < N (i - N < 0)
+    movl %ecx, %r8d            # j = i (column index j in %r8d) to avoid double switching
+    cmpl %esi, %ecx            # while i < N (i - N < 0)
     jge doneWithRows
 
 # For each cell of this row
 colLoop:
-    cmpl %edx, %r8d            # while j < N (j - N < 0)
+    cmpl %esi, %r8d            # while j < N (j - N < 0)
     jge doneWithCells
 
-# Copy the element A points to (%rdi) to the cell C points to (%rsi)
-    movb (%rdi), %r9b          # temp = element A points to
-    movb %r9b, (%rsi)          # cell C points to = temp
+# Copy the element A[i][j] points to A[j][i]
+# A[i][j] = A + L(i*N + j)
+    movl %esi, %edx             # edx holds N
+    imul %ecx, %edx             # edx holds N * i
+    addl %r8d, %edx             # edx holds (N*i) + j
+    movb (%rdi, %rdx), %r9b     # temp = A[ + i*N + j], A[i][j]
 
-# Update A and C so they now point to their next element 
-    incq %rdi
-    incq %rsi
+    pushq %r9b                  # push temp to stack
+    pushq %edx                  # push A[i][j] incrementation to stack
 
+    # compute A[j][i] same way but filled
+
+    movl %esi, %edx             # edx holds N
+    imul %r8d, %edx             # edx holds N * j
+    addl %ecx, %edx             # edx holds (N*j) + i
+    movb (%rdi, %rdx), %r9b     # temp = A[j][i]
+    movb %r9b, (%rdi, %rsp)     # A[i][j] = temp
+
+    subq $8, %rsp               # decrement stack
+    movb %rsp, (%rdi, %edx)     # move temp into A[j][i]  
+    subq $8, %rsp               # decrement stack
+
+
+# increment j
     incl %r8d                  # j++ (column index in %r8d)
     jmp colLoop                # go to next cell
 
@@ -88,12 +104,11 @@ doneWithCells:
     incl %ecx                  # i++ (row index in %ecx)
     jmp rowLoop                # go to next row
 
-doneWithRows:                  # bye! bye!
+doneWithRows:             
     ret
 
 
 
-	ret
 
 
 
