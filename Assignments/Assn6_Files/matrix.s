@@ -62,49 +62,47 @@ transpose:
     xorl %ecx, %ecx            # i = 0 (row index i is in %ecx)
 
 # For each row
-rowLoop:
+rowLoop1:
     movl %ecx, %r8d            # j = i (column index j in %r8d) to avoid double switching
     cmpl %esi, %ecx            # while i < N (i - N < 0)
-    jge doneWithRows
+    jge doneWithRows1
 
 # For each cell of this row
-colLoop:
+colLoop1:
     cmpl %esi, %r8d            # while j < N (j - N < 0)
-    jge doneWithCells
+    jge doneWithCells1
 
 # Copy the element A[i][j] points to A[j][i]
 # A[i][j] = A + L(i*N + j)
     movl %esi, %edx             # edx holds N
     imul %ecx, %edx             # edx holds N * i
     addl %r8d, %edx             # edx holds (N*i) + j
-    movb (%rdi, %rdx), %r9b     # temp = A[ + i*N + j], A[i][j]
+    leaq (%rdi, %rdx), %r9     # temp = A[ + i*N + j], &A[i][j]
 
-    pushq %r9b                  # push temp to stack
-    pushq %edx                  # push A[i][j] incrementation to stack
-
-    # compute A[j][i] same way but filled
+    # compute &A[j][i] same way but filled
 
     movl %esi, %edx             # edx holds N
     imul %r8d, %edx             # edx holds N * j
     addl %ecx, %edx             # edx holds (N*j) + i
-    movb (%rdi, %rdx), %r9b     # temp = A[j][i]
-    movb %r9b, (%rdi, %rsp)     # A[i][j] = temp
+    leaq (%rdi, %rdx), %r10    # r10 = temp = &A[j][i]
 
-    subq $8, %rsp               # decrement stack
-    movb %rsp, (%rdi, %edx)     # move temp into A[j][i]  
-    subq $8, %rsp               # decrement stack
+
+    movb (%r9), %r11b             # r11 temp = A[i][j] 
+    movb (%r10), %al            # ax holds A[j][i]
+    movb %al, (%r9)            #set A[i][j] to A[j][i]
+    movb %r11b, (%r10)         # set A[j][i] to temp
 
 
 # increment j
     incl %r8d                  # j++ (column index in %r8d)
-    jmp colLoop                # go to next cell
+    jmp colLoop1                # go to next cell
 
 # Go to next row
-doneWithCells:
+doneWithCells1:
     incl %ecx                  # i++ (row index in %ecx)
-    jmp rowLoop                # go to next row
+    jmp rowLoop1                # go to next row
 
-doneWithRows:             
+doneWithRows1:             
     ret
 
 
@@ -120,9 +118,9 @@ doneWithRows:
 
 
 #####################
-	.globl	reverseColumns
-reverseColumns:
+#	.globl	reverseColumns
+#reverseColumns:
     # void reverseColumns(void *, int n);
     # memory address in %rdi, N in %esi
 
-	ret
+#	ret
