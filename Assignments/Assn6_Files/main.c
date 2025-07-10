@@ -10,8 +10,8 @@
 #define N 4
 
 void copy(void *, void *, int);
-//void transpose(void *, int );
-//void reverseColumns(void *, int n);
+void transpose(void *, int );
+void reverseColumns(void *, int n);
 void printMatrixByRow(void *, int);
 
 char A[N][N] = { 1,  -2,  3,  -4,
@@ -33,8 +33,8 @@ void main() {
   printMatrixByRow(C, N);
 
   printf("Rotating the matrix C by 90 degrees clockwise: \n");
-//  transpose(C, N);
-//  reverseColumns(C, N);
+  transpose(C, N);
+  reverseColumns(C, N);
   printMatrixByRow(C, N);
 
   return;
