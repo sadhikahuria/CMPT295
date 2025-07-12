@@ -151,6 +151,9 @@ main:
 	movq	%rbp, %rdi
 	movl	$4, %esi
 	call	transpose@PLT
+	movq	%rbp, %rdi
+	movl	$4, %esi
+	call	reverseColumns@PLT
 	addq	$8, %rsp
 	.cfi_def_cfa_offset 24
 	movq	%rbp, %rdi

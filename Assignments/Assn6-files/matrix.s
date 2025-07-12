@@ -1,3 +1,10 @@
+# Name: Sadhika Huria
+# transpose: transpose Matrix
+# reverse columns, reverse
+# Student id: 301599274
+# Date: July 11, 2025
+
+
     .globl    copy
 # ***** Version 2 *****
 copy:
@@ -89,10 +96,10 @@ colLoop1:
     leaq (%rdi, %rdx), %r10    # r10 = temp = &A[j][i]
 
 
-    movl (%r9), %r11d             # r11 temp = A[i][j] 
-    movl (%r10), %eax            # ax holds A[j][i]
-    movl %eax, (%r9)            #set A[i][j] to A[j][i]
-    movl %r11d, (%r10)         # set A[j][i] to temp
+    movb (%r9), %r11b             # r11 temp = A[i][j] 
+    movb (%r10), %al           # ax holds A[j][i]
+    movb %al, (%r9)            #set A[i][j] to A[j][i]
+    movb %r11b, (%r10)         # set A[j][i] to temp
 
 
 # increment j
@@ -113,7 +120,7 @@ doneWithRows1:
 
 #####################
 	.globl	reverseColumns
-#reverseColumns:
+reverseColumns:
     # void reverseColumns(void *, int n);
     # memory address in %rdi, N in %esi
 
@@ -161,10 +168,10 @@ col_loop:
 
     # switch A[i][j] and A[i][z]
 
-    movl (%r9), %r11d               # r11 -> temp = A[i][j]
-    movl (%r10), %r8d               # r8 -> temp2 = A[i][z]
-    movl %r8d, (%r9)                 # set A[i][j] = temp2 = A[i][z]
-    movl %r11d, (%r10)              # set A[i][z] = temp = A[i][j]
+    movb (%r9), %r11b               # r11 -> temp = A[i][j]
+    movb (%r10), %r8b               # r8 -> temp2 = A[i][z]
+    movb %r8b, (%r9)                # set A[i][j] = temp2 = A[i][z]
+    movb %r11b, (%r10)              # set A[i][z] = temp = A[i][j]
 
 
     incl %ecx                       # j++
