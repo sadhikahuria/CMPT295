@@ -74,6 +74,7 @@ colLoop1:
 
 # Copy the element A[i][j] points to A[j][i]
 # A[i][j] = A + L(i*N + j)
+    xorq %rdx, %rdx             # zero rdx
     movl %esi, %edx             # edx holds N
     imul %ecx, %edx             # edx holds N * i
     addl %r8d, %edx             # edx holds (N*i) + j
@@ -81,6 +82,7 @@ colLoop1:
 
     # compute &A[j][i] same way but filled
 
+    xorq %rdx, %rdx             # zero rdx
     movl %esi, %edx             # edx holds N
     imul %r8d, %edx             # edx holds N * j
     addl %ecx, %edx             # edx holds (N*j) + i
