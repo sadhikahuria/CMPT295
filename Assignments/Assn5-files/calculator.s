@@ -9,6 +9,42 @@
 	.globl	mul
 
 
+is_less: # Description: 
+    # Change the name of this function to something more descriptive and add a description above
+
+	# edi -> x, esi -> y
+	xorl	%eax, %eax	# return value set to 0
+	cmpl	%esi, %edi	# x - y < 0 s.t. x < y, then setl is executed. 
+	setl	%al         # if x < y, return value is set to 1
+						# See Section 3.6.2 of our textbook for a  
+	ret                 # returns 1, if x < y, otherwise 0
+						# description of the set* instruction family
+
+plus: # Description: Performs integer addition
+# Requirement:
+# - you cannot use add* instruction
+# - you cannot use a loop
+
+# Put your code here
+# edi -> x, esi -> y
+
+    movl    %edi, %eax      # set return value to x
+    negl    %esi            # change y to -y 
+    subl    %esi, %eax      # set return val to x-(-y) (so, equivalent to x+y)
+	ret
+
+minus: # Description: Performs integer subtraction
+# Requirement:
+# - you cannot use sub* instruction
+# - you cannot use a loop
+
+# Put your code here
+# edi -> x, esi -> y
+
+    movl    %edi, %eax      # set return value to x
+    negl    %esi            # change y to -y 
+    addl    %esi, %eax      # set return val to x+(-y) (so, equivalent to x-y)
+	ret
 
 mul: 
 	testl %esi, %esi            # check if esi == 0
